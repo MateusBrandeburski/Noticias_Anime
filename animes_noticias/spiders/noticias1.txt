@@ -9,13 +9,9 @@ class NoticiasSpider(scrapy.Spider):
     start_urls = ["https://animenew.com.br/noticias/animes/"]
 
     def parse(self, response):
-        global raspagem
-        contador = 0
-        for noticias in response.css('.load-more-align-center a'):
-            raspagem = noticias.css('a::text').get() 
-            contador = contador+1
-            print(raspagem)
-            print(contador)
+        global noticias
+        noticias = response.css('.load-more-align-center a::text').extract() 
+        print(noticias)
 
 def start():
     process = CrawlerProcess(get_project_settings())
